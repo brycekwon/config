@@ -1,0 +1,269 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Name: Bryce Kwon
+" Version: v1.0.0
+"
+" Sections:
+"   -> General
+"   -> User Interface
+"   -> Colors and Fonts
+"   -> Files and Backups
+"   -> Text Related
+"   -> Visual Related
+"   -> Navigation
+"   -> Status Line
+"   -> Searching
+"   -> Spell Check
+"   -> Helper Functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""                     GENERAL                     """""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" set english as standard langauge "
+let $LANG='en'
+set langmenu=en
+source $VIMRUNTIME/menu.vim
+source $VIMRUNTIME/delmenu.vim
+
+" set utf8 as standard encoding "
+set encoding=utf8
+
+" set Unix as the standard file type "
+set ffs=unix,dos,mac
+
+" enable filetype/indent plugins "
+filetype plugin on
+filetype indent on
+
+" set auto read when a file is changed externally "
+set autoread
+au FocusGained,BufEnter * checktime
+
+" allow extra key combinations with map leader "
+let mapleader=','
+
+" enable fast saving "
+nmap <leader>w :w!<cr>
+
+" enable sudo saving "
+command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+
+" configure backspace "
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""                  USER INTERFACE                 """""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" set cursor lines (when moving vertically using j/k) "
+set so=7
+
+" enable wildmenu "
+set wildmenu
+
+" ignore compiled files "
+set wildignore=*.o,*~,*.pyc
+if has('win16') || has('win32')
+    set wildignore+=.git\*,.hg\*,.svn\*
+else
+    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+endif
+
+" always show current position "
+set ruler
+
+" set height of command bar "
+set cmdheight=1
+
+" hide buffer when abandoned "
+set hid
+
+" highlight search results "
+set hlsearch
+
+" disable redraw on macros execution "
+set lazyredraw
+
+" use magic for regular expressions "
+set magic
+
+" show matching brackets "
+set showmatch
+
+" set matching bracket blink frequency "
+set mat=2
+
+" disable sound on errors "
+if has("gui_macvim")
+    autocmd GUIEnter * set vb t_vb=
+endif
+
+" add a bit extra margin to the left "
+set foldcolumn=1
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""                 COLORS AND FONTS                """""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" enable syntax highlighting "
+syntax enable
+
+" set regulate expression engine automatically "
+set regexpengine=0
+
+" enable dark background "
+set background=dark
+
+" set extra options when running in GUI mode "
+if has("gui_running")
+    set guioptions -= T
+    set guioptions -= e
+    set t_Co=256
+    set guitablabel=%M\ %t
+endif
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""                FILES AND BACKUPS                """""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" disable backup "
+set nobackup
+set nowb
+set noswapfile
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""                  TEXT RELATED                   """""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" use spaces instead of tabs "
+set expandtab
+
+" set smart tabs "
+set smarttab
+
+" set default tab size (4 spaces) "
+set shiftwidth=4
+set tabstop=4
+
+" set linebreak limit (500 characters) "
+set lbr
+set tw=500
+
+" set auto indent "
+set ai
+
+" set smart indent "
+set si
+
+" set wrap lines "
+set wrap
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""                  VISUAL RELATED                 """""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" set '*' and '#' as selection search shortcut "
+vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""                   NAVIGTATION                   """""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" map <space> to (search) and <ctrl + space> to (backwards search) "
+map <space> /
+map <C-space> ?
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""                   STATUS LINE                   """""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" always show the status line "
+set laststatus=2
+
+" format status line "
+set statusline=Line:\ %l\ \ Column:\ %c
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""                    SEARCHING                    """""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" ignore case when searching "
+set ignorecase
+
+" enable smartcase "
+set smartcase
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""                 SPELL CHECKING                  """""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" set spell check toggle "
+map <leader>ss :setlocal spell!<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""                HELPER FUNCTIONS                 """""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" check if paste mode is enabled "
+function! HasPaste()
+    if &paste
+        return 'PASTE MODE  '
+    endif
+    return ''
+endfunction
+
+" prevent window from closing when deleting a buffer "
+command! Bclose call <SID>BufcloseCloseIt()
+function! <SID>BufcloseCloseIt()
+    let l:currentBufNum=bufnr("%")
+    let l:alternateBufNum=bufnr("#")
+
+    if buflisted(l:alternateBufNum)
+        buffer #
+    else
+        bnext
+    endif
+
+    if bufnr("%") == l:currentBufNum
+        new
+    endif
+
+    if buflisted(l:currentBufNum)
+        execute("bdelete! ".l:currentBufNum)
+    endif
+endfunction
+
+function! CmdLine(str)
+    call feedkeys(":" . a:str)
+endfunction
+
+function! VisualSelection(direction, extra_filter) range
+    let l:saved_reg=@"
+    execute "normal! vgvy"
+
+    let l:pattern=escape(@", "\\/.*'$^~[]")
+    let l:pattern=substitute(l:pattern, "\n$", "", "")
+
+    if a:direction == 'gv'
+        call CmdLine("Ack '" . l:pattern . "' " )
+    elseif a:direction == 'replace'
+        call CmdLine("%s" . '/'. l:pattern . '/')
+    endif
+
+    let @/=l:pattern
+    let @"=l:saved_reg
+endfunction

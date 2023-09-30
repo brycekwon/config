@@ -1,0 +1,31 @@
+############################################################
+# Name: Bryce Kwon
+# Version: v1.0.0
+# 
+# Sections:
+#   -> General
+#   -> Homebrew
+############################################################
+
+
+############################################################
+#                          GENERAL                         #
+############################################################
+
+# disable zsh sessions directory
+export SHELL_SESSIONS_DISABLE=1
+
+
+############################################################
+#                          HOMEBREW                        #
+############################################################
+
+# set homebrew directories
+export HOMEBREW_PREFIX="/opt/homebrew";
+export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
+export HOMEBREW_REPOSITORY="/opt/homebrew";
+
+# set homebrew Path
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
+export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
+export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";

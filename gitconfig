@@ -1,0 +1,40 @@
+############################################################
+# Name: Bryce Kwon
+# Version: v1.0.0
+############################################################
+
+[user]
+    name = "Bryce Kwon"
+    email = "signer@brycekwon.dev"
+    signingkey = "0x73BEE2AE8F884C97"
+[core]
+    editor = "vim"
+    pager = "less -XRF"
+    defaultbranch = "main"
+[init]
+    defaultbranch = "main"
+[commit]
+    gpgsign = true
+[push]
+    default = "simple"
+[pull]
+	rebase = true
+[fetch]
+    prune = true
+[alias]
+    st = "status --verbose"
+    sh = "show --name-only"
+    vc = "verify-commit --verbose"
+    vt = "verify-tag --verbose"
+    ai = "add --verbose"
+    aa = "add --all --verbose"
+    ci = "commit"
+    ca = "commit --all"
+    br = "branch --all --verbose"
+    bd = "branch --delete --verbose"
+    bf = "branch --delete --force --verbose"
+    co = "checkout"
+    cb = "checkout -b"
+    gr = "log --graph --decorate"
+    lg = "log --graph --decorate --oneline"
+    authors = "!sh -c 'git log --format="%aN" | sort -k 2 -u'"
