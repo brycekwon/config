@@ -1,0 +1,40 @@
+############################################################
+# Name: Bryce Kwon
+# Version: v1.0.0
+# 
+# Sections:
+#   -> Personal Accounts
+#   -> General Settings
+############################################################
+
+
+############################################################
+#                    PERSONAL ACCOUNTS                     #
+############################################################
+
+# Personal Codeberg Account
+Host codeberg.org
+    User git
+    Hostname codeberg.org
+    IdentitiesOnly yes
+
+# Personal GitHub Account
+Host github.com
+    User git
+    Hostname github.com
+    IdentitiesOnly yes
+
+# Personal GitLab Account
+Host gitlab.com
+    User git
+    Hostname gitlab.com
+    IdentitiesOnly yes
+
+
+############################################################
+#                     GENERAL SETTINGS                     #
+############################################################
+
+# Global Settings
+Host *
+    IdentityFile ~/.ssh/id_access
