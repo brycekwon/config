@@ -1,6 +1,6 @@
 /**
  * name: Bryce Kwon
- * version: v1.0.0
+ * version: v1.1.0
  * 
  * sections:
  *      -> 0100 - Startup
@@ -288,6 +288,13 @@ user_pref("browser.urlbar.merino.enabled", false);
 /* 0610: disable engine suggestions */
 user_pref("browser.urlbar.suggest.engines", false);
 
+/* 0611: disable urlbar trending search suggestions */
+user_pref("browser.urlbar.trending.featureGate", false);
+
+/* 0806: disable urlbar suggestions ***/
+user_pref("browser.urlbar.addons.featureGate", false);
+user_pref("browser.urlbar.mdn.featureGate", false);
+
 
 /********** [ SECTION 0700 ] - PASSWORDS **********/
 
@@ -361,10 +368,10 @@ user_pref("privacy.userContext.ui.enabled", false);
 user_pref("memory.report_concurrency", 2);
 user_pref("dom.maxHardwareConcurrency", 2);
 
-/* 1005: limit system font visibility */
-user_pref("layout.css.font-visibility.private", 1);
-user_pref("layout.css.font-visibility.standard", 1);
-user_pref("layout.css.font-visibility.trackingprotection", 1);
+/* [DEPRECATED v1.1.0] 1005: limit system font visibility */
+// user_pref("layout.css.font-visibility.private", 1);
+// user_pref("layout.css.font-visibility.standard", 1);
+// user_pref("layout.css.font-visibility.trackingprotection", 1);
 
 /* 1006: enforce links targeting new windows to open in new tabs */
 user_pref("browser.link.open_newwindow", 3);
@@ -439,8 +446,8 @@ user_pref("webchannel.allowObject.urlWhitelist", "");
 /* 1207: disable PDFJS scripting */
 user_pref("pdfjs.enableScripting", false);
 
-/* 1208: disable permissions delegation */
-user_pref("permissions.delegation.enabled", false);
+/* [DEPRECATED v1.1.0] 1208: disable permissions delegation */
+// user_pref("permissions.delegation.enabled", false);
 
 /* 1209: disable check for Save card and address to Firefox checkboxes */
 user_pref("dom.payments.defaults.saveAddress", false);
@@ -507,3 +514,6 @@ user_pref("permissions.default.microphone", 2);
 
 /* 1228: disable permission access to virtual reality */
 user_pref("permissions.default.xr", 2);
+
+/* 1229: remove temporary files opened with an external application */
+user_pref("browser.download.start_downloads_in_tmp_dir", true);
