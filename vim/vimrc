@@ -54,6 +54,8 @@ command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
 
+" disable viminfo "
+set viminfo=""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""                  USER INTERFACE                 """""

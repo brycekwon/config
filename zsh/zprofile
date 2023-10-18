@@ -15,6 +15,9 @@
 # disable zsh sessions directory
 export SHELL_SESSIONS_DISABLE=1
 
+# disable less history
+export LESSHISTFILE=-
+
 
 ############################################################
 #                          HOMEBREW                        #
