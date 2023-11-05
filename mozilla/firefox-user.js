@@ -1,6 +1,6 @@
 /**
  * name: Bryce Kwon
- * version: v1.1.0
+ * version: v1.1.1
  * 
  * sections:
  *      -> 0100 - Startup
@@ -15,6 +15,7 @@
  *      -> 1000 - Privacy Protection
  *      -> 1100 - Shutdown / Sanitization
  *      -> 1200 - Miscellaneous
+ *      -> 1300 - To Categorize
  */
 
 
@@ -517,3 +518,22 @@ user_pref("permissions.default.xr", 2);
 
 /* 1229: remove temporary files opened with an external application */
 user_pref("browser.download.start_downloads_in_tmp_dir", true);
+
+
+/********** [ SECTION 1300 ] - TO CATEGORIZE **********/
+
+/* TBD: disable Firefox Safe Browsing */
+user_pref("browser.safebrowsing.malware.enabled", false);
+user_pref("browser.safebrowsing.phishing.enabled", false);
+user_pref("browser.safebrowsing.downloads.enabled", false);
+
+/* TBD: disable Firefox Safe Browsing checks for downloads */
+user_pref("browser.safebrowsing.downloads.remote.enabled", false);
+user_pref("browser.safebrowsing.downloads.remote.url", "");
+
+/* TBD: disable Firefox Safe Browsing checks for unwanted software */
+user_pref("browser.safebrowsing.downloads.remote.block_potentially_unwanted", false);
+user_pref("browser.safebrowsing.downloads.remote.block_uncommon", false);
+
+/* TBD: disable "ignore this warning" on Firefox Safe Browsing warnings */
+// user_pref("browser.safebrowsing.allowOverride", false);
